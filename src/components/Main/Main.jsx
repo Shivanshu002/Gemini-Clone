@@ -4,10 +4,19 @@ import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
 
 
+
 const Main = () => {
 
 
     const { onSent, recentPrompt, showResult, loading, resultData, setInput, input, } = useContext(Context);
+
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            onSent();
+        }
+    };
 
 
     return (
@@ -18,6 +27,8 @@ const Main = () => {
                     <p>Gemini</p>
                     <img src={assets.user_icon} alt='' />
                 </div>
+
+
                 <div className='main-container'>
 
                     {
@@ -49,6 +60,7 @@ const Main = () => {
                             </> :
                             <div className='result'>
                                 <div className='result-title'>
+
                                     <img src={assets.user_icon} alt='' />
                                     <p>{recentPrompt}</p>
 
@@ -56,6 +68,7 @@ const Main = () => {
 
                                 <div className='result-data'>
                                     <img src={assets.gemini_icon} alt='' />
+
                                     {
                                         loading
                                             ?
@@ -76,25 +89,29 @@ const Main = () => {
 
 
 
-                </div>
 
-                <div className="main-bottom">
-                    <div className="search-box">
-                        <input onChange={(e) => setInput(e.target.value)} value={input} type='text' placeholder='Enter prompt here. ' />
-                        <div>
-                            <img src={assets.gallery_icon} alt='' />
-                            <img src={assets.mic_icon} alt='' />
-                            {input ? <img onClick={() => onSent()} src={assets.send_icon} alt='' /> : null}
+                    {/* Search bar */}
+                    <div className="main-bottom">
+                        <div className="search-box">
+                            <input onKeyDown={handleKeyDown} onChange={(e) => setInput(e.target.value)} value={input} type='text' placeholder='Enter prompt here. ' />
+                            <div>
+                                <img src={assets.gallery_icon} alt='' />
+                                <img src={assets.mic_icon} alt='' />
+                                {input ? <img onClick={() => onSent()} src={assets.send_icon} alt='' /> : null}
+                            </div>
                         </div>
+
+                        <p className='bottom-info'>
+                            Gemini may display inaccurate info, including about people, so double-check its response. Your privacy and Gemini Apps.
+                        </p>
+
                     </div>
 
 
-
                 </div>
 
-                <p className='bottom-info'>
-                    Gemini may display inaccurate info, including about people, so double-check its response. Your privacy and Gemini Apps.
-                </p>
+
+
 
             </div>
         </>

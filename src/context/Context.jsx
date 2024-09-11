@@ -74,7 +74,11 @@ const ContextProvider = (props) => {
 
         setResultData(newResponse2);
         setLoading(false);
-        setInput("")
+
+        if (input.trim()) {
+            // console.log('Sent:', input);
+            setInput("")
+        }
     }
 
     const contextValue = {
