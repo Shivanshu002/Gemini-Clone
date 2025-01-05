@@ -1,3 +1,5 @@
+**Please do not focus on .env file there are some issue in system with git thats why .env file is not hide in this projet**
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
